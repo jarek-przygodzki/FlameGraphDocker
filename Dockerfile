@@ -5,8 +5,10 @@ RUN set -x && \
     perl
 
 # Grab flamegraph
-RUN	wget -O /usr/local/bin/flamegraph.pl https://raw.githubusercontent.com/brendangregg/FlameGraph/master/flamegraph.pl \
-	&& chmod +x /usr/local/bin/flamegraph.pl
+RUN	wget -O FlameGraph.zip https://github.com/brendangregg/FlameGraph/archive/master.zip && \
+	unzip -j FlameGraph.zip 'FlameGraph-master/*.pl' -d /usr/local/bin && \
+	rm -f FlameGraph.zip && \
+	chmod +x /usr/local/bin/*.pl
 
 
 ENTRYPOINT ["/usr/local/bin/flamegraph.pl"]
